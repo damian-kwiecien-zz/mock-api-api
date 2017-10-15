@@ -26,6 +26,9 @@ const userRulesCreator = async () => {
                     return userRepo.findOne({ where: { email: req.body.email } })
                         .then(u => bcrypt.compare(password, u!.password))
                 }).withMessage('Invalid email or password')
+        ],
+        forCheck: [
+            check('token').exists().withMessage('Token is required')
         ]
     }
 }

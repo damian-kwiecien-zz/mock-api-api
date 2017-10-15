@@ -1,7 +1,7 @@
 import * as bcrypt from 'bcrypt'
 import * as jwt from 'jsonwebtoken'
 import { connection } from '../instances'
-import { User, UserRegisterModel, UserLoginModel } from '../entities/user'
+import { User, UserRegisterModel, UserLoginModel } from '../entities'
 
 export class UserService {
     private readonly _saltRounds = 12
@@ -20,8 +20,9 @@ export class UserService {
     async register({ email, password }: UserRegisterModel) {
         const hash = await bcrypt.hash(password, this._saltRounds)
         const userRepoSync = await this._userRepo
-
-        return userRepoSync.create({ email, password: hash })
+        
+        const user = userRepoSync.create({ email, password: hash })
+        userRepoSync.save(user)
     }
 
     async login({ email }: UserLoginModel) {
