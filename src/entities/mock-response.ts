@@ -7,6 +7,9 @@ export class MockResponse {
     id: number
 
     @Column('text')
+    name: string
+
+    @Column('text')
     method: HttpMethod
 
     @Column('text')
@@ -17,6 +20,7 @@ export class MockResponse {
 }
 
 export interface MockResponseAddModel {
+    name: string
     method: HttpMethod
     endpoint: string
     body: string
