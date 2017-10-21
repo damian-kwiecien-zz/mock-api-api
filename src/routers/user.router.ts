@@ -12,9 +12,9 @@ const createUserRouter = async () => {
 
     userRouter.post('/register', userRulesSync['forRegister'], bodyValidator(), async (req, res) => {
         const payload = matchedData(req) as UserRegisterModel
-        const user = await userService.register(payload)
+        await userService.register(payload)
 
-        return res.json(user)
+        return res.json({ message: 'Ok' })
     })
 
     userRouter.post('/login', userRulesSync['forLogin'], bodyValidator(), async (req, res) => {
