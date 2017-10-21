@@ -21,7 +21,7 @@ export const mockResponse = () => async (req: Request, res: Response, next: Next
     const response = await mapReqToMockResponse(req)
 
     if (response)
-        res.json(response.body)
+        res.json(JSON.parse(response.body))
 
     next()
 }
