@@ -20,9 +20,7 @@ export class MockResponseService {
         const mockResponseRepoSync = await this._mockResponseRepo
 
         const mockResponse = mockResponseRepoSync.create(model)
-        mockResponseRepoSync.save(mockResponse)
-
-        return mockResponse
+        return await mockResponseRepoSync.save(mockResponse)
     }
 
     async updateMockResponse(responseId: number, model: MockResponseAddModel) {
